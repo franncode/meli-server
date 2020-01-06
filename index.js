@@ -1,5 +1,5 @@
 const express = require('express')
-const cors = require('cors')
+// const cors = require('cors')
 const path = require('path')
 const compression = require('compression')
 const async = require('express-async-await')
@@ -7,10 +7,10 @@ const fetch = require('node-fetch')
 const port = process.env.PORT || 5000
 const app = express()
 
-var corsOptions = {
-	origin: 'https://mercadolibre.now.sh',
-	optionsSuccessStatus: 200
-}
+// var corsOptions = {
+// 	origin: 'https://mercadolibre.now.sh',
+// 	optionsSuccessStatus: 200
+// }
 
 app.use(compression())
 
@@ -36,7 +36,7 @@ app.get('/api/trends', async function(req, res) {
 	}
 })
 
-app.get('/api/items', cors(corsOptions), async function(req, res) {
+app.get('/api/items', async function(req, res) {
 	try {
 		const response = await fetch(
 			`https://api.mercadolibre.com/sites/MLA/search?q=${req.query.q}&limit=4`
