@@ -12,7 +12,6 @@ var corsOptions = {
 	optionsSuccessStatus: 200
 }
 
-app.use(express.urlencoded({ extended: false }))
 app.use(compression())
 
 app.get('/api/trends', async function(req, res) {
