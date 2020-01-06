@@ -3,11 +3,11 @@ const path = require('path')
 const compression = require('compression')
 const async = require('express-async-await')
 const fetch = require('node-fetch')
-
+const port = process.env.PORT || 5000
 const app = express()
 
+app.use(express.urlencoded({ extended: false }))
 app.use(compression())
-app.use(express.static(path.join(__dirname, 'client/build')))
 
 app.get('/api/trends', async function(req, res) {
 	try {
@@ -121,7 +121,6 @@ app.get('/api/items/:id', async function(req, res) {
 	}
 })
 
-const port = process.env.PORT || 5000
-app.listen(port)
-
-console.log('Meli server is listening on port ' + port)
+app.listen(port, () => {
+	console.log('Meli server is listening on port ' + port)
+})

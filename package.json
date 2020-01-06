@@ -5,14 +5,15 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
-		"heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+		"dev": "nodemon index.js"
 	},
 	"keywords": [],
 	"author": "Francisco Rodriguez",
-	"license": "ISC",
+	"license": "MIT",
 	"dependencies": {
+		"express": "^4.17.1",
+		"nodemon": "^1.19.1",
 		"compression": "^1.7.3",
-		"express": "^4.16.3",
 		"express-async-await": "^1.1.0",
 		"node-fetch": "^2.3.0"
 	}
