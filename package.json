@@ -1,19 +1,19 @@
 {
-  "name": "mercado-facil",
-  "version": "1.0.0",
-  "description": "Mercado Facil",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
-  },
-  "keywords": [],
-  "author": "Francisco Rodriguez",
-  "license": "ISC",
-  "dependencies": {
-    "compression": "^1.7.3",
-    "express": "^4.16.3",
-    "express-async-await": "^1.1.0",
-    "node-fetch": "^2.3.0"
-  }
+	"name": "mercadolibre-server",
+	"description": "Mercado Libre",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+	},
+	"keywords": [],
+	"author": "Francisco Rodriguez",
+	"license": "ISC",
+	"dependencies": {
+		"compression": "^1.7.3",
+		"express": "^4.16.3",
+		"express-async-await": "^1.1.0",
+		"node-fetch": "^2.3.0"
+	}
 }
