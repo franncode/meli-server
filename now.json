@@ -11,7 +11,7 @@
 			"src": "/api/items",
 			"dest": "/index.js",
 			"methods": ["GET"]
-		}
+		},
 		{
 			"src": "/api/items/:id'",
 			"dest": "/index.js",
