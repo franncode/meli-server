@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000
 const app = express()
 
 var corsOptions = {
-	origin: 'http://example.com',
+	origin: 'https://mercadolibre.now.sh',
 	optionsSuccessStatus: 200
 }
 
