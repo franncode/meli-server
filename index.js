@@ -1,5 +1,4 @@
 const express = require('express')
-// const cors = require('cors')
 const path = require('path')
 const compression = require('compression')
 const async = require('express-async-await')
@@ -7,12 +6,24 @@ const fetch = require('node-fetch')
 const port = process.env.PORT || 5000
 const app = express()
 
-// var corsOptions = {
-// 	origin: 'https://mercadolibre.now.sh',
-// 	optionsSuccessStatus: 200
-// }
-
 app.use(compression())
+app.use(function(req, res, next) {
+	var allowedOrigins = ['http://localhost:3000', 'https://mercadolibre.now.sh']
+	var origin = req.headers.origin
+	if (allowedOrigins.indexOf(origin) > -1) {
+		res.setHeader('Access-Control-Allow-Origin', origin)
+	}
+	res.setHeader(
+		'Access-Control-Allow-Methods',
+		'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+	)
+	res.setHeader(
+		'Access-Control-Allow-Headers',
+		'X-Requested-With, Content-Type'
+	)
+	res.setHeader('Access-Control-Allow-Credentials', true)
+	next()
+})
 
 app.get('/api/trends', async function(req, res) {
 	try {
