@@ -73,9 +73,6 @@ app.get('/api/items', async function(req, res) {
 				categories = categoriesFromFilters[0].values.map(({ name }) => name)
 			}
 
-			console.log('categories1', categoriesFromAvailableFilters)
-			console.log('categories2 ', categoriesFromFilters)
-
 			const items = await data.results.map(result => {
 				let formatPrice = {}
 				if (/\./.test(String(result.price))) {
@@ -112,8 +109,6 @@ app.get('/api/items', async function(req, res) {
 			res.json(final)
 		}
 	} catch (error) {
-		console.log('error', error)
-
 		res
 			.status(404)
 			.send('No se pudo obtener correctamente los datos de Mercado Libre')
@@ -122,46 +117,45 @@ app.get('/api/items', async function(req, res) {
 
 app.get('/api/items/:id', async function(req, res) {
 	try {
-		const itemResponse = await fetch(
-			`https://api.mercadolibre.com/items/${req.params.id}`
-		)
-		const itemData = await itemResponse.json()
+		const [productResponse, descriptionResponse] = await Promise.all([
+			fetch(`https://api.mercadolibre.com/items/${req.params.id}`),
+			fetch(`https://api.mercadolibre.com/items/${req.params.id}/descriptions`)
+		])
 
-		const descriptionResponse = await fetch(
-			`https://api.mercadolibre.com/items/${req.params.id}/descriptions`
-		)
+		const productData = await productResponse.json()
+
 		const descriptionData = await descriptionResponse.json()
 
 		const categoriesResponse = await fetch(
-			`https://api.mercadolibre.com/categories/${itemData.category_id}`
+			`https://api.mercadolibre.com/categories/${productData.category_id}`
 		)
 		const categoriesData = await categoriesResponse.json()
 
-		const paths = categoriesData.path_from_root.map(path => path.name)
+		const paths = await categoriesData.path_from_root.map(path => path.name)
 
 		let formatPrice = {}
-		if (/\./.test(String(result.price))) {
-			formatPrice.intPart = Number(String(itemData.price).split('.')[0])
-			formatPrice.decPart = Number(String(itemData.price).split('.')[1])
+		if (/\./.test(String(productData.price))) {
+			formatPrice.intPart = Number(String(productData.price).split('.')[0])
+			formatPrice.decPart = Number(String(productData.price).split('.')[1])
 		} else {
-			formatPrice.intPart = result.price
+			formatPrice.intPart = productData.price
 			formatPrice.decPart = 0
 		}
 
 		const product = {
 			author: { name: 'Francisco', lastname: 'Rodriguez' },
 			item: {
-				id: itemData.id,
-				title: itemData.title,
+				id: productData.id,
+				title: productData.title,
 				price: {
-					currency: itemData.currency_id,
+					currency: productData.currency_id,
 					amount: formatPrice.intPart,
 					decimals: formatPrice.decPart
 				},
-				picture: itemData.pictures[0].url.replace('http', 'https'),
-				condition: itemData.condition,
-				free_shipping: itemData.shipping.free_shipping,
-				sold_quantity: itemData.sold_quantity,
+				picture: productData.pictures[0].url.replace('http', 'https'),
+				condition: productData.condition,
+				free_shipping: productData.shipping.free_shipping,
+				sold_quantity: productData.sold_quantity,
 				description: descriptionData[0].plain_text,
 				categories: paths
 			}
