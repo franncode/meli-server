@@ -56,9 +56,25 @@ app.get('/api/items', async function(req, res) {
 		if (data.results.length === 0) {
 			res.status(204).send(`No se obtubieron resultados de ${req.query.q}`)
 		} else {
-			const categories = await data.available_filters
-				.filter(filter => filter.id === 'category')[0]
-				.values.map(({ name }) => name)
+			let categories
+
+			let categoriesFromAvailableFilters = await data.available_filters.filter(
+				filter => filter.id === 'category'
+			)
+			let categoriesFromFilters = await data.filters.filter(
+				filter => filter.id === 'category'
+			)
+
+			if (categoriesFromAvailableFilters.length > 0) {
+				categories = categoriesFromAvailableFilters[0].values.map(
+					({ name }) => name
+				)
+			} else if (categoriesFromFilters.length > 0) {
+				categories = categoriesFromFilters[0].values.map(({ name }) => name)
+			}
+
+			console.log('categories1', categoriesFromAvailableFilters)
+			console.log('categories2 ', categoriesFromFilters)
 
 			const items = await data.results.map(result => {
 				let formatPrice = {}
