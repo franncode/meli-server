@@ -154,7 +154,7 @@ app.get('/api/items/:id', async function(req, res) {
 					amount: formatPrice.intPart,
 					decimals: formatPrice.decPart
 				},
-				picture: data1.pictures[0].url,
+				picture: data1.pictures[0].url.replace('http', 'https'),
 				condition: data1.condition,
 				free_shipping: data1.shipping.free_shipping,
 				sold_quantity: data1.sold_quantity,
