@@ -122,27 +122,27 @@ app.get('/api/items', async function(req, res) {
 
 app.get('/api/items/:id', async function(req, res) {
 	try {
-		const response1 = await fetch(
+		const itemResponse = await fetch(
 			`https://api.mercadolibre.com/items/${req.params.id}`
 		)
-		const data1 = await response1.json()
+		const itemData = await itemResponse.json()
 
-		const response2 = await fetch(
+		const descriptionResponse = await fetch(
 			`https://api.mercadolibre.com/items/${req.params.id}/descriptions`
 		)
-		const data2 = await response2.json()
+		const descriptionData = await descriptionResponse.json()
 
-		const response3 = await fetch(
-			`https://api.mercadolibre.com/categories/${data1.category_id}`
+		const categoriesResponse = await fetch(
+			`https://api.mercadolibre.com/categories/${itemData.category_id}`
 		)
-		const data3 = await response3.json()
+		const categoriesData = await categoriesResponse.json()
 
-		const paths = await data3.path_from_root.map(path => path.name)
+		const paths = categoriesData.path_from_root.map(path => path.name)
 
 		let formatPrice = {}
 		if (/\./.test(String(result.price))) {
-			formatPrice.intPart = Number(String(result.price).split('.')[0])
-			formatPrice.decPart = Number(String(result.price).split('.')[1])
+			formatPrice.intPart = Number(String(itemData.price).split('.')[0])
+			formatPrice.decPart = Number(String(itemData.price).split('.')[1])
 		} else {
 			formatPrice.intPart = result.price
 			formatPrice.decPart = 0
@@ -151,18 +151,18 @@ app.get('/api/items/:id', async function(req, res) {
 		const product = {
 			author: { name: 'Francisco', lastname: 'Rodriguez' },
 			item: {
-				id: data1.id,
-				title: data1.title,
+				id: itemData.id,
+				title: itemData.title,
 				price: {
-					currency: data1.currency_id,
+					currency: itemData.currency_id,
 					amount: formatPrice.intPart,
 					decimals: formatPrice.decPart
 				},
-				picture: data1.pictures[0].url.replace('http', 'https'),
-				condition: data1.condition,
-				free_shipping: data1.shipping.free_shipping,
-				sold_quantity: data1.sold_quantity,
-				description: data2[0].plain_text,
+				picture: itemData.pictures[0].url.replace('http', 'https'),
+				condition: itemData.condition,
+				free_shipping: itemData.shipping.free_shipping,
+				sold_quantity: itemData.sold_quantity,
+				description: descriptionData[0].plain_text,
 				categories: paths
 			}
 		}
