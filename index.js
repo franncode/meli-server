@@ -139,9 +139,13 @@ app.get('/api/items/:id', async function(req, res) {
 
 		const paths = await data3.path_from_root.map(path => path.name)
 
-		const formatPrice = await {
-			intPart: Math.trunc(data1.price),
-			decPart: Number((data1.price - Math.trunc(data1.price)).toFixed(2))
+		let formatPrice = {}
+		if (/\./.test(String(result.price))) {
+			formatPrice.intPart = Number(String(result.price).split('.')[0])
+			formatPrice.decPart = Number(String(result.price).split('.')[1])
+		} else {
+			formatPrice.intPart = result.price
+			formatPrice.decPart = 0
 		}
 
 		const product = {
