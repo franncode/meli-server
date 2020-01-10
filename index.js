@@ -56,7 +56,7 @@ app.get('/api/items', async function(req, res) {
 		if (data.results.length === 0) {
 			res.status(204).send(`No se obtubieron resultados de ${req.query.q}`)
 		} else {
-			let categories
+			let categories = []
 
 			let categoriesFromAvailableFilters = await data.available_filters.filter(
 				filter => filter.id === 'category'
