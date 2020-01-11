@@ -19,6 +19,8 @@ const formatPrice = (currency, price) => {
 	}
 }
 
+const formatPicture = url => url.replace('http', 'https')
+
 const formatItems = ({ available_filters, filters, results }) => {
 	const categories = () => {
 		let categoriesFromAvailableFilters = available_filters.filter(
@@ -38,7 +40,7 @@ const formatItems = ({ available_filters, filters, results }) => {
 		id: result.id,
 		title: result.title,
 		price: formatPrice(result.currency_id, result.price),
-		picture: result.thumbnail.replace('http', 'https'),
+		picture: formatPicture(result.thumbnail),
 		condition: result.condition,
 		free_shipping: result.shipping.free_shipping,
 		city: result.address.state_name
@@ -54,7 +56,7 @@ const formatItem = (product, description, categories) => {
 		id: product.id,
 		title: product.title,
 		price: formatPrice(product.currency_id, product.price),
-		picture: product.pictures[0].url.replace('http', 'https'),
+		picture: formatPicture(product.pictures[0].url),
 		condition: product.condition,
 		free_shipping: product.shipping.free_shipping,
 		sold_quantity: product.sold_quantity,
