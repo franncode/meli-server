@@ -1,4 +1,4 @@
-# <img src="./public/icons/logo.png" alt="Logo" height="24px" > Mercado Libre by [@franncode](https://www.linkedin.com/in/franncode/)
+# <img src="./logo.png" alt="Logo" height="24px" > Mercado Libre by [@franncode](https://www.linkedin.com/in/franncode/)
 Express api server https://server-mercadolibre.herokuapp.com/<br/>
 
 ## Stack
