@@ -17,12 +17,12 @@ Install all proyect dependencies
 npm install
 ```
 
-Run proyect en development mode
+Run proyect with hot reload
 ```
 npm run dev
 ```
 
-Run proyect en production mode
+Run proyect in production mode
 ```
-npm run prod
+npm run start
 ```
