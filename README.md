@@ -12,7 +12,7 @@ Tool that helps develop Node.js based applications by automatically restarting t
 
 ## Scripts
 
-Install all proyect dependencies
+Install proyect dependencies
 ```
 npm install
 ```
