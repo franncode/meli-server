@@ -3,7 +3,7 @@ Express api server https://server-mercadolibre.herokuapp.com/<br/>
 
 ## Stack
 
-<a href="http://expressjs.com/" alt="Logo" height="22px"/><img src="<img src="https://user-images.githubusercontent.com/13700/35731649-652807e8-080e-11e8-88fd-1b2f6d553b2d.png" alt="Logo" height="22px"/>" alt="Logo" height="22px"/></a> Express  
+<a href="http://expressjs.com/" alt="Logo" height="22px"/><img src="https://user-images.githubusercontent.com/13700/35731649-652807e8-080e-11e8-88fd-1b2f6d553b2d.png" alt="Logo" height="22px"/>" alt="Logo" height="22px"/></a> Express  
 Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 
 <a href="https://nodemon.io/"><img src="https://user-images.githubusercontent.com/13700/35731649-652807e8-080e-11e8-88fd-1b2f6d553b2d.png" alt="Logo" height="22px"/></a> Nodemon  
