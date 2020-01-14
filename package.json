@@ -1,7 +1,7 @@
 {
 	"author": "Francisco Rodriguez",
 	"name": "mercadolibre-server",
-	"description": "Mercado Libre",
+	"description": "Mercado Libre API",
 	"version": "1.0.0",
 	"license": "MIT",
 	"keywords": [],
@@ -17,7 +17,9 @@
 		"compression": "^1.7.3",
 		"express": "^4.17.1",
 		"express-async-await": "^1.1.0",
-		"node-fetch": "^2.3.0",
-		"nodemon": "^1.19.1"
+		"node-fetch": "^2.3.0"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.2"
 	}
 }
