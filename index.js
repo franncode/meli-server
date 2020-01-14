@@ -25,6 +25,10 @@ app.use(function(req, res, next) {
 	next()
 })
 
+app.get('/', (req, res) => {
+	res.send('Welcome to Mercado Libre API')
+})
+
 app.get('/api/trends', async (req, res) => {
 	try {
 		const response = await fetch(`${proxy}/trends/MLA`, {
