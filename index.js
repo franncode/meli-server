@@ -5,6 +5,7 @@ const port = process.env.PORT || 5000
 const app = express()
 const proxy = 'https://api.mercadolibre.com'
 const { formatItems, formatItem } = require('./formater')
+const googleApiKey = 'AIzaSyD79jFJfqlmnuh3Vu8Wy3tGBKHwQ5HaLJs'
 
 app.use(compression())
 app.use(function(req, res, next) {
@@ -43,6 +44,24 @@ app.get('/api/trends', async (req, res) => {
 		res
 			.status(404)
 			.send('No se pudo obtener correctamente los datos de Mercado Libre')
+	}
+})
+
+app.get('/api/location', async ({ query: { lat, lng } }, res) => {
+	try {
+		const response = await fetch(
+			`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true&key=${googleApiKey}`,
+			{
+				headers: { 'Accept-Encoding': 'br' }
+			}
+		)
+		const data = await response.json()
+
+		res.json({ data })
+	} catch {
+		res
+			.status(404)
+			.send('No se pudo obtener correctamente los datos de geolocalizacion')
 	}
 })
 
