@@ -4,8 +4,8 @@ const fetch = require('node-fetch')
 const port = process.env.PORT || 5000
 const app = express()
 const proxy = 'https://api.mercadolibre.com'
+const googleApiKey = process.env.GOOGLE_API_KEY
 const { formatItems, formatItem } = require('./formater')
-const googleApiKey = 'AIzaSyD79jFJfqlmnuh3Vu8Wy3tGBKHwQ5HaLJs'
 
 app.use(compression())
 app.use(function(req, res, next) {
