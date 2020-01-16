@@ -9,7 +9,11 @@ const { formatItems, formatItem } = require('./formater')
 
 app.use(compression())
 app.use(function(req, res, next) {
-	var allowedOrigins = ['http://localhost:3000', 'https://mercadolibre.now.sh']
+	var allowedOrigins = [
+		'http://localhost:3000',
+		'https://mercadolibre.now.sh',
+		'https://dev-mercadolibre.now.sh'
+	]
 	var origin = req.headers.origin
 	if (allowedOrigins.indexOf(origin) > -1) {
 		res.setHeader('Access-Control-Allow-Origin', origin)
