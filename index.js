@@ -12,7 +12,8 @@ app.use(function(req, res, next) {
 	var allowedOrigins = [
 		'http://localhost:3000',
 		'https://mercadolibre.now.sh',
-		'https://dev-mercadolibre.now.sh'
+		'https://staging-mercadolibre.now.sh',
+		'https://development-mercadolibre.now.sh'
 	]
 	var origin = req.headers.origin
 	if (allowedOrigins.indexOf(origin) > -1) {
